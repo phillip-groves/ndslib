@@ -1,6 +1,7 @@
 package com.pgroves.ndslib;
 
 import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 
 /**
  * A representation of the NDS ROM file and its bytes. Data about the from can be accessed 
@@ -134,5 +135,19 @@ public class NdsRom {
 	 */
 	public int getPosition() {
 		return romBuffer.position();
+	}
+	
+	public void setEndian(ByteOrder endian) {
+		this.romBuffer = romBuffer.order(endian);
+	}
+	
+	public void skip(int amount) {
+		for (int i = 0; i < amount; i++)
+			getByte();
+	}
+	
+	public void backtrack(int amount) {
+		int currPos = getPosition();
+		setPosition(currPos - amount);
 	}
 }

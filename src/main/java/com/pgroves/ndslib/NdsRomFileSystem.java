@@ -4,6 +4,7 @@ import com.pgroves.ndslib.nitro.NitroFAT;
 import com.pgroves.ndslib.nitro.NitroFNT;
 import com.pgroves.ndslib.nitro.NitroFile;
 import com.pgroves.ndslib.nitro.NitroFolder;
+import com.pgroves.ndslib.nitro.file.NarcFile;
 
 /**
  * NDS ROMs after use the NitroROM file system to hold game-related files. The 
@@ -21,6 +22,8 @@ public class NdsRomFileSystem {
 	/** NDS custom FNT table */
 	private final NitroFNT fileNameTable;
 	
+	private NdsRom rom;
+	
 	/**
 	 * 
 	 * @param ndsRom The ROM holding this file system
@@ -28,11 +31,17 @@ public class NdsRomFileSystem {
 	public NdsRomFileSystem(NdsRom ndsRom) {
 		this.fileAllocationTable = new NitroFAT(ndsRom);
 		this.fileNameTable = new NitroFNT(ndsRom, fileAllocationTable);
+		this.rom = ndsRom;
 	}
 	
-	/** TODO: Get file by file format as unique object */
-	public <T extends NitroFile> T getFile(T type, String path) {
+	/** TODO: Get file by file format as unique object 
+	 * @param <T>*/
+	public <T> Object getFile(T type, String path) {
 		
+		if (type == NarcFile.class) {
+			System.out.println("Types match");
+			return NarcFile.fromPath(rom, path);
+		}
 		
 		return null;
 	}
@@ -50,7 +59,7 @@ public class NdsRomFileSystem {
 		String folderPath = "";
 		for (int i = 0; i < pathData.length - 1; i++) 
 			folderPath += pathData[i] + "/";
-		//System.out.println("Folder Path: " + folderPath);
+		
 		NitroFolder folder = getFolder(folderPath);
 		return getFileInFolder(folder, fileName);
 	}

@@ -13,7 +13,7 @@ import junit.framework.TestCase;
 public class NdsRomFileReadTests extends TestCase {
 
 	@Test
-	public void testReadTitle() {
+	public void testFileRead() {
 		// Load the rom
 		File romFile = new File("src/test/resources/"
 				+ "Pokemon SoulSilver [Extracted From Cartridge 2-15-2019].nds");

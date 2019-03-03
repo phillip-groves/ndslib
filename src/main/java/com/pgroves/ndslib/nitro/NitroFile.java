@@ -7,7 +7,7 @@ package com.pgroves.ndslib.nitro;
  * @author Phillip Groves
  */
 public class NitroFile {
-
+	
 	/** Offset within the ROM of this file */
 	private int offset;
 	
