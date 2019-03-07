@@ -39,6 +39,6 @@ nds.load(romFile);
 NitroFile file = nds.getCurrentRom().getFileSystem().getFile("a/0/0/5");
 String fileName = file.getName();
 
-NitroFolder file = nds.getCurrentRom().getFileSystem().getFolder("a/0/0");
-String folderName = file.getName();
+NitroFolder folder = nds.getCurrentRom().getFileSystem().getFolder("a/0/0");
+String folderName = folder.getName();
 ```
